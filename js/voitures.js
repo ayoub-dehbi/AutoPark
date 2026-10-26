@@ -29,6 +29,7 @@ function add() {
     cars.push(add_car)
 }
 
+
 function display() {
     liste_voitures.innerHTML = ""
 
@@ -80,6 +81,7 @@ function display() {
         Supprimer.textContent = "Supprimer"
         Supprimer.className = "button button-delete"
         Supprimer.setAttribute("type", "button")
+        Supprimer.addEventListener("click",()=> (delet(element.id)))
         div.appendChild(Supprimer)
 
         td7.append(div)
@@ -91,6 +93,12 @@ function display() {
 
     });
 }
+function delet(id){
+    cars = cars.filter(item=> item.id !== id)
+    console.log(cars)
+    display()
+}
+
 
 bouton_enregistrer.addEventListener("click" , (e)=>{
     e.preventDefault()
