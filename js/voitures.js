@@ -4,6 +4,7 @@ let cars = voituresInitiales;
 // console.log(cars);
 
 
+const formulaire_voiture = document.getElementById("formulaire-voiture")
 const marque = document.getElementById("marque")
 const modele = document.getElementById("modele")
 const immatriculation = document.getElementById("immatriculation")
@@ -11,9 +12,13 @@ const categorie = document.getElementById("categorie")
 const prix_jour = document.getElementById("prix-jour")
 const statut = document.getElementById("statut")
 const bouton_enregistrer = document.getElementById("bouton-enregistrer")
+const annuler_modification = document.getElementById("annuler-modification")
 const liste_voitures = document.getElementById("liste-voitures")
 
+let edit_car
 let id_car = 6
+
+let edit_checker = 0
 
 display()
 
@@ -74,6 +79,7 @@ function display() {
         Modifier.textContent = "Modifier"
         Modifier.className = "button button-edit"
         Modifier.setAttribute("type", "button")
+        Modifier.addEventListener("click", () => (edite(element.id)))
         div.appendChild(Modifier)
 
 
@@ -81,7 +87,7 @@ function display() {
         Supprimer.textContent = "Supprimer"
         Supprimer.className = "button button-delete"
         Supprimer.setAttribute("type", "button")
-        Supprimer.addEventListener("click",()=> (delet(element.id)))
+        Supprimer.addEventListener("click", () => (delet(element.id)))
         div.appendChild(Supprimer)
 
         td7.append(div)
@@ -93,16 +99,51 @@ function display() {
 
     });
 }
-function delet(id){
-    cars = cars.filter(item=> item.id !== id)
+function delet(id) {
+    cars = cars.filter(item => item.id !== id)
     console.log(cars)
     display()
 }
 
+function edite(id) {
+    edit_checker = id
+    edit_car = cars.find(item => item.id == id)
+    console.log(edit_car);
 
-bouton_enregistrer.addEventListener("click" , (e)=>{
+    marque.value = edit_car.marque
+    modele.value = edit_car.modele
+    immatriculation.value = edit_car.immatriculation
+    categorie.value = edit_car.categorie
+    prix_jour.value = edit_car.prixJour
+    statut.value = edit_car.statut
+    annuler_modification.hidden = false
+
+}
+
+
+bouton_enregistrer.addEventListener("click", (e) => {
     e.preventDefault()
-    add()
+
+    if (edit_checker === 0) 
+        add()
+    else {
+        edit_car.marque = marque.value
+        edit_car.modele = modele.value
+        edit_car.immatriculation = immatriculation.value
+        edit_car.categorie = categorie.value
+        edit_car.prixJour = prix_jour.value
+        edit_car.statut = statut.value
+        edit_checker = 0
+        annuler_modification.hidden = true
+    }
+    formulaire_voiture.reset()
     display()
+})
+
+annuler_modification.addEventListener("click",(e)=>{
+    e.preventDefault()
+        annuler_modification.hidden = true
+        edit_checker = 0
+        formulaire_voiture.reset()
 })
 
