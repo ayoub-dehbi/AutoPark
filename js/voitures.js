@@ -15,12 +15,15 @@ const bouton_enregistrer = document.getElementById("bouton-enregistrer")
 const annuler_modification = document.getElementById("annuler-modification")
 const liste_voitures = document.getElementById("liste-voitures")
 
+const recherche = document.getElementById("recherche")
+
+
 let edit_car
 let id_car = 6
 
 let edit_checker = 0
 
-display()
+display(cars)
 
 function add() {
     let add_car = {}
@@ -35,7 +38,7 @@ function add() {
 }
 
 
-function display() {
+function display(cars) {
     liste_voitures.innerHTML = ""
 
     cars.forEach(element => {
@@ -102,7 +105,7 @@ function display() {
 function delet(id) {
     cars = cars.filter(item => item.id !== id)
     console.log(cars)
-    display()
+    display(cars)
 }
 
 function edite(id) {
@@ -137,7 +140,7 @@ bouton_enregistrer.addEventListener("click", (e) => {
         annuler_modification.hidden = true
     }
     formulaire_voiture.reset()
-    display()
+    display(cars)
 })
 
 annuler_modification.addEventListener("click",(e)=>{
@@ -147,3 +150,15 @@ annuler_modification.addEventListener("click",(e)=>{
         formulaire_voiture.reset()
 })
 
+recherche.addEventListener("input",(e)=>{
+    const searchValue = e.target.value.toLowerCase()
+
+    const search_resolt = cars.filter(item => {
+        return item.marque.toLowerCase().includes(searchValue)||
+            item.modele.toLowerCase().includes(searchValue)||
+            item.immatriculation.toLowerCase().includes(searchValue)
+    })
+    console.log(search_resolt);
+    
+    display(search_resolt)
+})
