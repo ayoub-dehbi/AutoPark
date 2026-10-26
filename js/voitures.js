@@ -17,17 +17,17 @@ let id_car = 6
 
 display()
 
-// function add() {
-//     let add_car = {}
-//     add_car.id = id_car++
-//     add_car.marque = marque.value
-//     add_car.modele = modele.value
-//     add_car.immatriculation = immatriculation.value
-//     add_car.categorie = categorie.value
-//     add_car.prixJour = prix_jour.value
-//     add_car.statut = statut.value
-//     cars.push(add_car)
-// }
+function add() {
+    let add_car = {}
+    add_car.id = id_car++
+    add_car.marque = marque.value
+    add_car.modele = modele.value
+    add_car.immatriculation = immatriculation.value
+    add_car.categorie = categorie.value
+    add_car.prixJour = prix_jour.value
+    add_car.statut = statut.value
+    cars.push(add_car)
+}
 
 function display() {
     liste_voitures.innerHTML = ""
@@ -92,9 +92,9 @@ function display() {
     });
 }
 
-// bouton_enregistrer.addEventListener("click" , (e)=>{
-//     e.preventDefault()
-//     add()
-//     display()
-// })
+bouton_enregistrer.addEventListener("click" , (e)=>{
+    e.preventDefault()
+    add()
+    display()
+})
 
