@@ -18,6 +18,13 @@ const liste_voitures = document.getElementById("liste-voitures")
 const recherche = document.getElementById("recherche")
 
 
+if (localStorage.getItem("cars")) 
+    cars = JSON.parse(localStorage.getItem("cars"))
+else
+    localStorage.setItem("cars",JSON.stringify(cars))
+
+
+
 let edit_car
 let id_car = 6
 
@@ -35,11 +42,17 @@ function add() {
     add_car.prixJour = prix_jour.value
     add_car.statut = statut.value
     cars.push(add_car)
+
+    localStorage.setItem("cars", JSON.stringify(cars))
+
 }
 
 
 function display(cars) {
     liste_voitures.innerHTML = ""
+    if (cars.length === 0)
+        return
+
 
     cars.forEach(element => {
         const tr = document.createElement("tr")
@@ -106,6 +119,7 @@ function delet(id) {
     cars = cars.filter(item => item.id !== id)
     console.log(cars)
     display(cars)
+    localStorage.setItem("cars", JSON.stringify(cars))
 }
 
 function edite(id) {
@@ -121,13 +135,18 @@ function edite(id) {
     statut.value = edit_car.statut
     annuler_modification.hidden = false
 
+
 }
 
 
 bouton_enregistrer.addEventListener("click", (e) => {
     e.preventDefault()
+    if (marque.value === "" || modele.value === "" ||
+        immatriculation.value === "" || categorie.value === "" ||
+        prix_jour.value === "" || statut.value === "")
+        return alert("fille the input")
 
-    if (edit_checker === 0) 
+    if (edit_checker === 0)
         add()
     else {
         edit_car.marque = marque.value
@@ -138,27 +157,29 @@ bouton_enregistrer.addEventListener("click", (e) => {
         edit_car.statut = statut.value
         edit_checker = 0
         annuler_modification.hidden = true
+        localStorage.setItem("cars", JSON.stringify(cars))
+
     }
     formulaire_voiture.reset()
     display(cars)
 })
 
-annuler_modification.addEventListener("click",(e)=>{
+annuler_modification.addEventListener("click", (e) => {
     e.preventDefault()
-        annuler_modification.hidden = true
-        edit_checker = 0
-        formulaire_voiture.reset()
+    annuler_modification.hidden = true
+    edit_checker = 0
+    formulaire_voiture.reset()
 })
 
-recherche.addEventListener("input",(e)=>{
+recherche.addEventListener("input", (e) => {
     const searchValue = e.target.value.toLowerCase()
 
     const search_resolt = cars.filter(item => {
-        return item.marque.toLowerCase().includes(searchValue)||
-            item.modele.toLowerCase().includes(searchValue)||
+        return item.marque.toLowerCase().includes(searchValue) ||
+            item.modele.toLowerCase().includes(searchValue) ||
             item.immatriculation.toLowerCase().includes(searchValue)
     })
     console.log(search_resolt);
-    
+
     display(search_resolt)
 })
