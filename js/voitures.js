@@ -21,8 +21,7 @@ const erreur_marque = document.getElementById("erreur-marque")
 const aide_immatriculation = document.getElementById("aide-immatriculation")
 const erreur_prix_jour = document.getElementById("erreur-prix-jour")
 const erreur_categorie = document.getElementById("erreur-categorie")
-const erreur_statut = document.getElementById("erreur-statut")
-console.log(erreur_statut);
+// const erreur_statut = document.getElementById("erreur-statut")
 
 
 const recherche = document.getElementById("recherche")
@@ -55,7 +54,7 @@ function add() {
     add_car.modele = modele.value
     add_car.immatriculation = immatriculation.value
     add_car.categorie = categorie.value
-    add_car.prixJour = prix_jour.value
+    add_car.prixJour = Number(prix_jour.value)
     add_car.statut = statut.value
     cars.push(add_car)
 
@@ -177,31 +176,53 @@ function edite(id) {
     annuler_modification.hidden = false
 }
 
+function isvalid(){
+    erreur_marque.textContent = ""
+    erreur_modele.textContent = ""
+    aide_immatriculation.textContent = "Utilisez une immatriculation fictive et unique."
+    erreur_prix_jour.textContent = ""
+    erreur_prix_jour.textContent = ""
+    erreur_categorie.textContent = ""
+
+    let isvalid = true
+    if (marque.value.trim() === "") {
+        erreur_marque.textContent = "La marque est obligatoire."
+        isvalid = false
+    }
+
+    if (modele.value.trim() === "") {
+        erreur_modele.textContent = "Le modèle est obligatoire."
+        isvalid = false
+    }
+
+    if (immatriculation.value.trim() === "") {
+        aide_immatriculation.textContent = "L'immatriculation est obligatoire."
+        isvalid = false
+    }
+
+    if (prix_jour.value.trim() == "") {
+        erreur_prix_jour.textContent = "Le prix est obligatoire."
+        isvalid = false
+    }
+
+    else if (Number.isNaN(prix_jour.value) || prix_jour.value <= 0) {
+        erreur_prix_jour.textContent = "Le prix doit être supérieur à 0."
+        isvalid = false
+    }
+
+    if (categorie.value === "") {
+        erreur_categorie.textContent = "La catégorie est obligatoire."
+        isvalid = false
+    }
+    return isvalid
+}
+
 
 bouton_enregistrer.addEventListener("click", (e) => {
     e.preventDefault()
-    if(marque.value === "" || modele.value === "" 
-        ||immatriculation.value === ""||prix_jour.value == ""
-        ||categorie.value === ""||statut.value === ""||prix_jour.value <= 0){
-        if (marque.value === "")
-             erreur_marque.textContent = "marque not enter"
-        
-        if (modele.value === "")
-             erreur_modele.textContent = "modele not enter"
     
-        if (immatriculation.value === "")
-             aide_immatriculation.textContent = "immatriculation not enter"
-    
-        if (prix_jour.value == "")
-             erreur_prix_jour.textContent = "prix not enter"
-    
-        else if (prix_jour.value <= 0)
-             erreur_prix_jour.textContent = "prix <= 0"
-    
-        if (categorie.value === "")
-            erreur_categorie.textContent = "categorie not enter"
+    if (!isvalid())
         return
-    }
 
     else if (edit_checker === 0) {
 
