@@ -31,8 +31,26 @@ display()
 
 function display() {
     liste_voitures.innerHTML = ""
+    let badge;
 
     cars.forEach(element => {
+
+        switch (element.statut) {
+            case "Disponible":
+                badge = "badge-disponible";
+                break;
+            case "Louée":
+                badge = "badge-louee";
+                break;
+            case "En maintenance":
+                badge = "badge-maintenance";
+                break;
+
+            default:
+                break;
+        }
+
+
         const tr = document.createElement("tr")
 
         const td1 = document.createElement("td")
@@ -63,6 +81,7 @@ function display() {
         const span3 = document.createElement("span")
         span3.textContent = element.statut
         span3.className = "badge badge-disponible"
+        span3.classList.add(`${badge}`)
         td6.appendChild(span3)
 
         const td7 = document.createElement("td")
