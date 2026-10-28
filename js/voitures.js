@@ -1,6 +1,6 @@
 import { voituresInitiales } from './data.js';
 
-let cars = voituresInitiales;
+let cars = [...voituresInitiales];
 // console.log(cars);
 
 
@@ -15,13 +15,22 @@ const bouton_enregistrer = document.getElementById("bouton-enregistrer")
 const annuler_modification = document.getElementById("annuler-modification")
 const liste_voitures = document.getElementById("liste-voitures")
 
+
+const erreur_modele = document.getElementById("erreur-modele")
+
+
 const recherche = document.getElementById("recherche")
+const filtre_statut = document.getElementById("filtre-statut")
+const filtre_categorie = document.getElementById("filtre-categorie")
+const tri_prix = document.getElementById("tri-prix")
+const reinitialiser_filtres = document.getElementById("reinitialiser-filtres")
 
 
-if (localStorage.getItem("cars")) 
+
+if (localStorage.getItem("cars"))
     cars = JSON.parse(localStorage.getItem("cars"))
 else
-    localStorage.setItem("cars",JSON.stringify(cars))
+    localStorage.setItem("cars", JSON.stringify(cars))
 
 
 
@@ -33,6 +42,7 @@ let edit_checker = 0
 display(cars)
 
 function add() {
+
     let add_car = {}
     add_car.id = id_car++
     add_car.marque = marque.value
@@ -116,16 +126,24 @@ function display(cars) {
     });
 }
 function delet(id) {
+    if (!confirm("remove"))
+        return
     cars = cars.filter(item => item.id !== id)
-    console.log(cars)
+    formulaire_voiture.reset()
+    annuler_modification.hidden = true
+    bouton_enregistrer.textContent = "Ajouter la voiture"
     display(cars)
     localStorage.setItem("cars", JSON.stringify(cars))
 }
 
 function edite(id) {
+
+    if (!confirm("befora edite"))
+        return
     edit_checker = id
+    bouton_enregistrer.textContent = "modifi la voiture"
     edit_car = cars.find(item => item.id == id)
-    console.log(edit_car);
+    // console.log(edit_car);
 
     marque.value = edit_car.marque
     modele.value = edit_car.modele
@@ -134,8 +152,6 @@ function edite(id) {
     prix_jour.value = edit_car.prixJour
     statut.value = edit_car.statut
     annuler_modification.hidden = false
-
-
 }
 
 
@@ -144,11 +160,20 @@ bouton_enregistrer.addEventListener("click", (e) => {
     if (marque.value === "" || modele.value === "" ||
         immatriculation.value === "" || categorie.value === "" ||
         prix_jour.value === "" || statut.value === "")
-        return alert("fille the input")
+        return erreur_modele.textContent = "error 404"
 
-    if (edit_checker === 0)
+    else if (edit_checker === 0) {
+        if (prix_jour.value <= 0) {
+            alert("prix <= 0")
+            return
+        }
+        else if (!confirm("add"))
+            return
         add()
+    }
     else {
+        if (!confirm("confirm the edite"))
+            return
         edit_car.marque = marque.value
         edit_car.modele = modele.value
         edit_car.immatriculation = immatriculation.value
@@ -157,7 +182,10 @@ bouton_enregistrer.addEventListener("click", (e) => {
         edit_car.statut = statut.value
         edit_checker = 0
         annuler_modification.hidden = true
+        bouton_enregistrer.textContent = "Ajouter la voiture"
+
         localStorage.setItem("cars", JSON.stringify(cars))
+
 
     }
     formulaire_voiture.reset()
@@ -166,20 +194,69 @@ bouton_enregistrer.addEventListener("click", (e) => {
 
 annuler_modification.addEventListener("click", (e) => {
     e.preventDefault()
+    if (!confirm("cancal"))
+        return
     annuler_modification.hidden = true
+    bouton_enregistrer.textContent = "Ajouter la voiture"
+
     edit_checker = 0
     formulaire_voiture.reset()
 })
 
-recherche.addEventListener("input", (e) => {
-    const searchValue = e.target.value.toLowerCase()
+recherche.addEventListener("input", applay_the_filter)
+filtre_statut.addEventListener("change", applay_the_filter)
+filtre_categorie.addEventListener("change", applay_the_filter)
+tri_prix.addEventListener("change", applay_the_filter)
 
-    const search_resolt = cars.filter(item => {
+reinitialiser_filtres.addEventListener("click", (e) => {
+    e.preventDefault()
+    recherche.textContent = "";
+    filtre_statut.selectedIndex = 0;
+    filtre_categorie.selectedIndex = 0;
+    tri_prix.selectedIndex = 0;
+    display(cars);
+})
+
+function applay_the_filter() {
+
+    const searchValue = recherche.value.toLowerCase().trim();
+
+    let search_resolt = cars.filter(item => {
         return item.marque.toLowerCase().includes(searchValue) ||
             item.modele.toLowerCase().includes(searchValue) ||
             item.immatriculation.toLowerCase().includes(searchValue)
     })
-    console.log(search_resolt);
+
+    if (filtre_statut.value != "")
+        search_resolt = search_resolt.filter(item => item.statut == filtre_statut.value)
+    if (filtre_categorie.value != "")
+        search_resolt = search_resolt.filter(item => item.categorie == filtre_categorie.value)
+
+    if (tri_prix.value == "croissant")
+        sort_croissant(search_resolt)
+    else if (tri_prix.value == "decroissant")
+        sort_decroissant(search_resolt)
 
     display(search_resolt)
-})
+}
+function sort_croissant(teamp_cars) {
+    for (let j = 0; j < teamp_cars.length; j++) {
+        for (let i = 0; i < teamp_cars.length - 1; i++)
+            if (teamp_cars[i].prixJour > teamp_cars[i + 1].prixJour)
+                swap(teamp_cars, i, i + 1)
+    }
+    return;
+}
+function sort_decroissant(teamp_cars) {
+    for (let j = 0; j < teamp_cars.length; j++) {
+        for (let i = 0; i < teamp_cars.length - 1; i++)
+            if (teamp_cars[i].prixJour < teamp_cars[i + 1].prixJour)
+                swap(teamp_cars, i, i + 1)
+    }
+    return;
+}
+function swap(arr, i, j) {
+    let a = arr[i];
+    arr[i] = arr[j];
+    arr[j] = a;
+}
