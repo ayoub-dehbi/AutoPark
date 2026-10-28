@@ -17,6 +17,12 @@ const liste_voitures = document.getElementById("liste-voitures")
 
 
 const erreur_modele = document.getElementById("erreur-modele")
+const erreur_marque = document.getElementById("erreur-marque")
+const aide_immatriculation = document.getElementById("aide-immatriculation")
+const erreur_prix_jour = document.getElementById("erreur-prix-jour")
+const erreur_categorie = document.getElementById("erreur-categorie")
+const erreur_statut = document.getElementById("erreur-statut")
+console.log(erreur_statut);
 
 
 const recherche = document.getElementById("recherche")
@@ -81,8 +87,6 @@ function display(cars) {
             default:
                 break;
         }
-
-
         const tr = document.createElement("tr")
 
         const td1 = document.createElement("td")
@@ -176,17 +180,32 @@ function edite(id) {
 
 bouton_enregistrer.addEventListener("click", (e) => {
     e.preventDefault()
-    if (marque.value === "" || modele.value === "" ||
-        immatriculation.value === "" || categorie.value === "" ||
-        prix_jour.value === "" || statut.value === "")
-        return erreur_modele.textContent = "error 404"
+    if(marque.value === "" || modele.value === "" 
+        ||immatriculation.value === ""||prix_jour.value == ""
+        ||categorie.value === ""||statut.value === ""||prix_jour.value <= 0){
+        if (marque.value === "")
+             erreur_marque.textContent = "marque not enter"
+        
+        if (modele.value === "")
+             erreur_modele.textContent = "modele not enter"
+    
+        if (immatriculation.value === "")
+             aide_immatriculation.textContent = "immatriculation not enter"
+    
+        if (prix_jour.value == "")
+             erreur_prix_jour.textContent = "prix not enter"
+    
+        else if (prix_jour.value <= 0)
+             erreur_prix_jour.textContent = "prix <= 0"
+    
+        if (categorie.value === "")
+            erreur_categorie.textContent = "categorie not enter"
+        return
+    }
 
     else if (edit_checker === 0) {
-        if (prix_jour.value <= 0) {
-            alert("prix <= 0")
-            return
-        }
-        else if (!confirm("add"))
+
+        if (!confirm("add"))
             return
         add()
     }
@@ -229,7 +248,7 @@ tri_prix.addEventListener("change", applay_the_filter)
 
 reinitialiser_filtres.addEventListener("click", (e) => {
     e.preventDefault()
-    recherche.textContent = "";
+    recherche.value = "";
     filtre_statut.selectedIndex = 0;
     filtre_categorie.selectedIndex = 0;
     tri_prix.selectedIndex = 0;
