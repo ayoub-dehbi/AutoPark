@@ -299,20 +299,16 @@ function applay_the_filter() {
     display(search_resolt)
 }
 function sort_croissant(teamp_cars) {
-    for (let j = 0; j < teamp_cars.length; j++) {
+    for (let j = 0; j < teamp_cars.length; j++) 
         for (let i = 0; i < teamp_cars.length - 1; i++)
             if (teamp_cars[i].prixJour > teamp_cars[i + 1].prixJour)
                 swap(teamp_cars, i, i + 1)
-    }
-    return;
 }
 function sort_decroissant(teamp_cars) {
-    for (let j = 0; j < teamp_cars.length; j++) {
+    for (let j = 0; j < teamp_cars.length; j++) 
         for (let i = 0; i < teamp_cars.length - 1; i++)
             if (teamp_cars[i].prixJour < teamp_cars[i + 1].prixJour)
                 swap(teamp_cars, i, i + 1)
-    }
-    return;
 }
 function swap(arr, i, j) {
     let a = arr[i];
