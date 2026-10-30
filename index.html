@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script type="module" src="js/dashboard.js"></script>
+
 </head>
 
 <body class=" bg-gray-200 ">
@@ -21,72 +23,75 @@
             <nav class="gap-8">
                 <!-- index.html est le dashboard à créer par l'apprenant. -->
                 <a class="bg-blue-100 text-blue-600 font-medium px-6 py-4 rounded-md " href="index.html">Dashboard</a>
-                <a class="px-6 py-4 font-medium rounded-md text-gray-600 hover:bg-gray-100 hover:text-black " href="voitures.html">Gestion du parc</a>
+                <a class="px-6 py-4 font-medium rounded-md text-gray-600 hover:bg-gray-100 hover:text-black "
+                    href="voitures.html">Gestion du parc</a>
             </nav>
             <span class="hidden md:flex">Agence de location</span>
         </div>
     </header>
 
-        <!-- main & Gestion du parc -->
-        <main class=" flex items-center justify-between mx-16 my-7 rounded-lg p-7 bg-white ">
+    <!-- main & Gestion du parc -->
+    <main class=" flex flex-col gap-4 items-center justify-between mx-16 my-7 rounded-lg p-7 bg-white md:flex-row">
+        <div>
+            <p class="text-blue-500 font-semibold">agence de location</p>
+            <h1 class="font-bold text-3xl">Tableau de bord</h1>
+            <p>consultez l'eta du sans ouvrir la liste complete</p>
+        </div>
+        <a href="voitures.html" class="bg-blue-600 rounded-xl px-2 px h-10 text-white flex items-center hover:bg-blue-500 hover:text-gray-800">gerer les
+            voitures</a>
+    </main>
+    <!-- dashboard -->
+    <section class=" mx-16 my-7 grid grid-cols-1 gap-4  md:grid-cols-2 xl:grid-cols-4">
+        <div class=" border-l-8 rounded-2xl border-blue-600 p-7 bg-white ">
+            <img class=" p-1 bg-blue-100  rounded-md" src="assets/icons/icons8-car-48.png" alt="Total">
             <div>
-                <p class="text-blue-500 font-semibold">agence de location</p>
-                <h1 class="font-bold text-3xl">Tableau de bord</h1>
-                <p>consultez l'eta du sans ouvrir la liste complete</p>
+                <h2 class="font-bold text-2xl ">Total</h2>
+                <h3 id="Total" class="font-bold text-4xl">0</h3>
+                <p class="">vehicules enregistres</p>
             </div>
-            <button class="bg-blue-600 rounded-xl px-2 px h-10 text-white">gerer les voitures</button>
-        </main>
-        <!-- dashboard -->
-        <section class=" mx-16 my-7 grid grid-cols-1 gap-4  md:grid-cols-2 xl:grid-cols-4"  >
-            <div class=" border-l-8 rounded-2xl border-blue-600 p-7 bg-white ">
-                <img class=" p-1 bg-blue-100  rounded-md" src="assets/icons/icons8-car-48.png" alt="Total">
-                <div>
-                    <h2 class="font-bold text-2xl ">Total</h2>
-                    <h3 id="Total" class="font-bold text-4xl">0</h3>
-                    <p class="">vehicules enregistres</p>
-                </div>
+        </div>
+        <div class="border-l-8 rounded-2xl  border-green-600 p-7 bg-white ">
+            <img class=" p-1 bg-green-100  rounded-md" src="assets/icons/icons8-checked-checkbox-48.png"
+                alt="disponibles">
+            <div>
+                <h2 class="font-bold text-2xl ">disponibles</h2>
+                <h3 id="disponibles" class="font-bold text-4xl">0</h3>
+                <p>pretes a la location</p>
             </div>
-            <div class="border-l-8 rounded-2xl  border-green-600 p-7 bg-white ">
-                <img class=" p-1 bg-green-100  rounded-md" src="assets/icons/icons8-checked-checkbox-48.png" alt="disponibles">
-                <div>
-                    <h2 class="font-bold text-2xl ">disponibles</h2>
-                    <h3 id="disponibles" class="font-bold text-4xl">0</h3>
-                    <p>pretes a la location</p>
-                </div>
+        </div>
+        <div class="border-l-8 rounded-2xl p-7  border-yellow-600 bg-white ">
+            <img class=" p-1 bg-yellow-100  rounded-md" src="assets/icons/icons8-key-64.png" alt="louees">
+            <div>
+                <h2 class="font-bold text-2xl ">louees</h2>
+                <h3 id="louees" class="font-bold text-4xl">0</h3>
+                <p>actuellement sorties</p>
             </div>
-            <div class="border-l-8 rounded-2xl p-7  border-yellow-600 bg-white ">
-                <img class=" p-1 bg-yellow-100  rounded-md" src="assets/icons/icons8-key-64.png" alt="louees">
-                <div>
-                    <h2 class="font-bold text-2xl ">louees</h2>
-                    <h3 id="louees" class="font-bold text-4xl">0</h3>
-                    <p>actuellement sorties</p>
-                </div>
+        </div>
+        <div class="border-l-8 rounded-2xl p-7  border-orange-600 bg-white ">
+            <img class=" p-1 bg-orange-100  rounded-md" src="assets/icons/icons8-tool-48.png" alt="en maintenance">
+            <div>
+                <h2 class="font-bold text-2xl ">en maintenance</h2>
+                <h3 id="en_maintenance" class="font-bold text-4xl">0</h3>
+                <p>indisponibles</p>
             </div>
-            <div class="border-l-8 rounded-2xl p-7  border-orange-600 bg-white ">
-                <img class=" p-1 bg-orange-100  rounded-md" src="assets/icons/icons8-tool-48.png" alt="en maintenance">
-                <div>
-                    <h2 class="font-bold text-2xl ">en maintenance</h2>
-                    <h3 id="en_maintenance" class="font-bold text-4xl">0</h3>
-                    <p>indisponibles</p>
-                </div>
-            </div>
-        </section>
-        <!-- status -->
-        <section class="mx-16 my-7 rounded-lg p-7 bg-white " >
-            <h2>repartition</h2>
-            <p>disponibles</p>
-            <div class="bg-gray-300 h-2 w-full rounded-sm" >
-                <div class="bg-red-300 h-2 w-[30%] rounded-sm"></div>
-            </div>
-            <p>louees</p>
-            <div class="bg-gray-300 h-2 w-full rounded-sm">
-                <div class="bg-red-300 h-2 w-[20%] rounded-sm"></div>
-            </div>
-            <p>maintenance</p>
-            <div class="bg-gray-300 h-2 w-full rounded-sm">
-                <div class="bg-red-300 h-2 w-[60%] rounded-sm"></div>
-            </div>
-        </section>
+        </div>
+    </section>
+    <!-- status -->
+    <section class="mx-16 my-7 rounded-lg p-7 bg-white ">
+        <h2 class="font-bold text-2xl mb-2 ">repartition</h2>
+        <p class="font-normal text-l ">disponibles</p>
+        <div class="bg-gray-300 h-2 w-full rounded-sm mb-3">
+            <div id="disponibles-percentage" class="bg-red-300 h-2 rounded-sm"></div>
+        </div>
+        <p>louees</p>
+        <div class="bg-gray-300 h-2 w-full rounded-sm mb-3">
+            <div id="louees-percentage" class="bg-red-300 h-2 rounded-sm "></div>
+        </div>
+        <p>maintenance</p>
+        <div class="bg-gray-300 h-2 w-full rounded-sm mb-3">
+            <div id="maintenance-percentage" class="bg-red-300 h-2 rounded-sm"></div>
+        </div>
+    </section>
 
 
 </body>
