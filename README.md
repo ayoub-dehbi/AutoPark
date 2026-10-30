@@ -441,6 +441,10 @@ Git et GitHub sont utilisés pour suivre l'évolution du projet.
 
 ![Responsive AutoPark](screenshots/responsive.png)
 
+### 🧩 Jira
+
+![Jira](screenshots/jira.png)
+
 ---
 
 ---
