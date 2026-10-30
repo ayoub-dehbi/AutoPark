@@ -62,7 +62,6 @@ function add() {
 
 }
 
-
 function display(cars) {
     liste_voitures.innerHTML = ""
     if (cars.length === 0)
@@ -147,6 +146,7 @@ function display(cars) {
 
     });
 }
+
 function delet(id) {
     if (!confirm("remove"))
         return
@@ -216,7 +216,6 @@ function isvalid(){
     }
     return isvalid
 }
-
 
 bouton_enregistrer.addEventListener("click", (e) => {
     e.preventDefault()
@@ -315,6 +314,3 @@ function swap(arr, i, j) {
     arr[i] = arr[j];
     arr[j] = a;
 }
-
-
-
