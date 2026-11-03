@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma location</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script type="module" src="js/ma_location.js"></script>
+
+</head>
+
+<body class="bg-gray-200">
+    <header class="flex items-center  bg-white px-16 ">
+        <div class="flex flex-col  my-3  gap-6 w-screen md:flex-row md:justify-between md:items-center">
+            <a class="flex gap-3 items-center " href="voitures.html" aria-label="AutoPark — Gestion du parc">
+                <span
+                    class="flex items-center justify-center bg-blue-600 w-11 h-11 rounded-xl text-3xl font-bold text-white"
+                    aria-hidden="true">A<span>.</span></span>
+                <span class="flex flex-col text-2xl font-bold ">AutoPark<small class="text-sm font-semibold ">ATLAS
+                        AUTO</small></span>
+            </a>
+            <nav class="flex items-center my-2 md:my-0">
+                <!-- index.html est le dashboard à créer par l'apprenant. -->
+                <a class="px-4 py-2 font-medium rounded-md text-gray-600 hover:bg-gray-100 hover:text-black "
+                    href="index.html">Dashboard</a>
+                <a class="px-4 py-2 font-medium rounded-md text-gray-600 hover:bg-gray-100 hover:text-black "
+                    href="voitures.html">Gestion du parc</a>
+                <a class="bg-blue-100 text-blue-600 font-medium px-4 py-2 rounded-md " href="ma_location.html">Ma
+                    location</a>
+            </nav>
+            <span class="hidden md:flex">Agence de location</span>
+        </div>
+    </header>
+    <div class="mx-6 my-4">
+        <p class="text-blue-600 font-bold text-xs">VOTRE LOCATION SUR MESURE</p>
+        <h3 class="font-bold text-4xl my-2">Composez votre location</h3>
+        <p class="text-gray-400 font-medium text-sm">Votre voiture, vos dates, vos options. À vous de choisir.</p>
+
+    </div>
+    <section class="bg-white flex justify-evenly items-center py-4 mx-6 rounded-2xl">
+        <div class="flex flex-col items-center justify-center gap-2 md:flex-row">
+            <p class=" flex items-center justify-center text-white bg-blue-600 h-8 w-8 rounded-full">1</p>
+            <p>Véhicule</p>
+        </div>
+        <div class="flex flex-col items-center justify-center gap-2 md:flex-row">
+            <p class=" flex items-center justify-center text-white bg-blue-600 h-8 w-8 rounded-full">2</p>
+            <p>Récupération</p>
+        </div>
+        <div class="flex flex-col items-center justify-center gap-2 md:flex-row">
+            <p class=" flex items-center justify-center text-white bg-blue-600 h-8 w-8 rounded-full">3</p>
+            <p>Options</p>
+        </div>
+        <div class="flex flex-col items-center justify-center gap-2 md:flex-row">
+            <p class=" flex items-center justify-center text-white bg-blue-600 h-8 w-8 rounded-full">4</p>
+            <p>Récapitulatif</p>
+        </div>
+    </section>
+
+    <section class="bg-white mx-6 my-6 rounded-2xl p-4 ">
+
+        <form action="">
+            <!-- step 1 -->
+            <div id="step_1" class="grid grid-cols-1 gap-4 ">
+                <p class="text-blue-600 text-xs font-semibold">01 / VÉHICULE</p>
+                <h3 class="text-2xl font-semibold">Choisissez votre véhicule</h3>
+                <p class="text-gray-400 font-semibold text-sm">Sélectionnez une voiture disponible et votre période de
+                    location.</p>
+                <ul id="carsList" class=" grid grid-cols-1 gap-2 my-6">
+                    <!-- <li class=" flex  flex-col border-3 border-blue-600 rounded-xl ">
+                        <label class="flex  flex-col w-full h-full p-4 gap-2">
+
+                            <div class="flex justify-between pr-2 ">
+                                <p
+                                    class="text-blue-600 text-sm font-semibold pl-2 flex items-center h-8 w-24  bg-blue-100 rounded-lg px-1">
+                                    Citadine</p>
+                                <input name="voiture" type="radio">
+                            </div>
+                            <h4 class="font-bold text-xl">Dacia Sandero</h4>
+                            <p class="text-base text-green-600">Disponible</p>
+                            <h4 class="font-bold text-lg text-blue-600">250 MAD / jour</h4>
+
+                        </label>
+                    </li>
+                    <li class=" flex  flex-col border-2 border-gray-200 rounded-xl">
+                        <label class="flex  flex-col w-full h-full p-4 gap-2">
+
+                            <div class="flex justify-between pr-2 ">
+                                <p
+                                    class="text-blue-600 text-sm font-semibold pl-2 flex items-center h-8 w-24  bg-blue-100 rounded-lg px-1">
+                                    Citadine</p>
+                                <input name="voiture" type="radio">
+                            </div>
+                            <h4 class="font-bold text-xl">Dacia Sandero</h4>
+                            <p class="text-base text-green-600">Disponible</p>
+                            <h4 class="font-bold text-lg text-blue-600">250 MAD / jour</h4>
+                        </label>
+
+                    </li>
+                    <li class=" flex  flex-col border-2 border-gray-200 rounded-xl">
+                        <label class="flex  flex-col w-full h-full p-4 gap-2">
+                            <div class="flex justify-between pr-2 ">
+                                <p
+                                    class="text-blue-600 text-sm font-semibold pl-2 flex items-center h-8 w-24  bg-blue-100 rounded-lg px-1">
+                                    Citadine</p>
+                                <input name="voiture" type="radio">
+                            </div>
+                            <h4 class="font-bold text-xl">Dacia Sandero</h4>
+                            <p class="text-base text-green-600">Disponible</p>
+                            <h4 class="font-bold text-lg text-blue-600">250 MAD / jour</h4>
+                        </label>
+
+                    </li> -->
+
+                </ul>
+                <hr class="text-gray-300">
+                <p class=" text-lg font-semibold my-4">Votre période de location</p>
+                <div class="grid gap-3">
+                    <div class="grid grid-cols-1">
+                        <p class="text-sm font-medium">Date de début *</p>
+                        <input class="border border-gray-300 rounded-md w-full h-10 px-4" type="date">
+
+                    </div>
+                    <div class="grid grid-cols-1">
+                        <p class="text-sm font-medium">Date de fin *</p>
+                        <input class="border border-gray-300 rounded-md w-full h-10 px-4" type="date">
+                    </div>
+                </div>
+                <p class="bg-blue-100 my-4 rounded-lg px-4">Durée : 3 jours. Les dates de début et de fin sont incluses.
+                </p>
+                <hr class="text-gray-300">
+                <div class="flex justify-between mx-4">
+                    <button
+                        class="font-bold bg-white border-2 border-gray-300 my-4 p-2 rounded-lg w-32 flex justify-center items-center"
+                        href="">Recommencer</button>
+                    <button
+                        class="font-bold bg-blue-600 my-4 p-2 rounded-lg w-32 flex justify-center  text-white items-center "
+                        href="">Suivant</button>
+                </div>
+            </div>
+            <!-- step 2 -->
+            <div id="step_2" class="grid grid-cols-1 gap-4  hidden ">
+                <p class="text-blue-600 text-sm font-semibold">02 / RÉCUPÉRATION</p>
+                <h3 class="text-3xl font-bold">Où récupérer votre voiture ?</h3>
+                <p class="text-gray-400 font-semibold text-sm">Choisissez le lieu qui vous convient.</p>
+
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="grid grid-cols-1 gap-3 mb-4">
+                        <label class=" block border-3 border-blue-600 rounded-2xl p-3  ">
+                            <input name="recuperation" type="radio">
+                            <h3 class="text-xl font-semibold my-3">À l’agence</h3>
+                            <p class="text-lg font-medium text-blue-600">Gratuit</p>
+                        </label>
+                        <label class="border-2 border-gray-200 rounded-2xl p-3  ">
+                            <input name="recuperation" type="radio">
+                            <h3 class="text-xl font-semibold my-3">À l’aéroport</h3>
+                            <p class="text-lg font-medium text-blue-600">+150 MAD</p>
+                        </label>
+                        <label class="border-2 border-gray-200 rounded-2xl p-3  ">
+                            <input name="recuperation" type="radio">
+                            <h3 class="text-xl font-semibold my-3">À une adresse</h3>
+                            <p class="text-lg font-medium text-blue-600">+100 MAD</p>
+                        </label>
+                    </div>
+                    <hr class="text-gray-300">
+                    <h3 class="text-2xl font-bold">Informations de récupération</h3>
+
+
+                    <div class="hidden">
+                        <label for="">
+                            <p class="text-gray-600 text-base font-bold">Aéroport *</p>
+                            <select class="border border-gray-300 rounded-md w-full h-10 px-4" name="" id="">
+                                <option value="Casablanca â€” Mohammed V">Casablanca â€” Mohammed V</option>
+                                <option value="Rabat â€” SalÃ©">Rabat â€” SalÃ©</option>
+                                <option value="Marrakech â€” MÃ©nara">Marrakech â€” MÃ©nara</option>
+                            </select>
+                        </label>
+
+                        <label for="">
+                            <p class="text-gray-600 text-base font-bold">Numéro du vol *</p>
+                            <input class="border border-gray-300 rounded-md w-full h-10 px-4" type="text">
+                        </label>
+
+                        <label for="">
+                            <p class="text-gray-600 text-base font-bold">Heure d’arrivée *</p>
+                            <input class="border border-gray-300 rounded-md w-full h-10 px-4" type="time">
+                        </label>
+                    </div>
+
+                    <div class="hidden">
+                        <label for="">
+                            <p class="text-gray-600 text-base font-bold">Ville *</p>
+                            <select class="border border-gray-300 rounded-md w-full h-10 px-4" name="" id="">
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                            </select>
+                        </label>
+
+                        <label for="">
+                            <p class="text-gray-600 text-base font-bold">Adresse complète *</p>
+                            <input class="border border-gray-300 rounded-md w-full h-10 px-4" type="text">
+                        </label>
+
+                        <label for="">
+                            <p class="text-gray-600 text-base font-bold">Heure de livraison *</p>
+                            <input class="border border-gray-300 rounded-md w-full h-10 px-4" type="time">
+                        </label>
+                    </div>
+
+                    <div class="">
+                        <label for="">
+                            <p class="text-gray-600 text-base font-bold">Heure de récupération *</p>
+                            <input class="border border-gray-300 rounded-md w-full h-10 px-4" type="time">
+                        </label>
+                    </div>
+
+                    <p class="bg-blue-100 text-blue-600 font-medium py-4 my-4 rounded-lg px-4">Le supplément de
+                        récupération est ajouté une seule fois au total.</p>
+
+                </div>
+                <hr class="text-gray-300">
+                <div class="flex justify-between mx-4">
+                    <button
+                        class="font-bold bg-white border-2 border-gray-300 my-4 p-2 rounded-lg w-32 flex justify-center items-center"
+                        href="">Précédent</button>
+                    <button
+                        class="font-bold bg-blue-600 my-4 p-2 rounded-lg w-32 flex justify-center  text-white items-center "
+                        href="">Suivant</button>
+                </div>
+
+            </div>
+            <!-- step 3 -->
+            <div id="step_3" class="grid grid-cols-1 gap-4 hidden ">
+                <p class="text-blue-600 text-sm font-semibold">03 / OPTIONS</p>
+                <h3 class="text-3xl font-bold">Les petits plus de votre location</h3>
+                <p class="text-gray-400 font-semibold text-sm">Ces options sont facultatives et facturées par jour.</p>
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="flex items-start gap-4  border-2 border-gray-200 rounded-2xl p-5  ">
+                        <input class=" mt-2" type="checkbox">
+                        <div>
+                            <h3 class="text-lg font-bold">Siège bébé</h3>
+                            <p class="text-gray-500 text-lg mt-3">30 MAD / jour · soit 90 MAD pour 3 jours</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 border-2 border-gray-200 rounded-2xl p-5  ">
+                        <input class="mt-2" type="checkbox">
+                        <div>
+                            <h3 class="text-lg font-bold">Conducteur supplémentaire</h3>
+                            <p class="text-gray-500 text-lg mt-3">200 MAD / jour · soit 600 MAD pour 3 jours</p>
+                        </div>
+                    </div>
+                    <p class="bg-blue-100 text-blue-600 font-medium py-4 my-4 rounded-lg px-4">Vous pouvez sélectionner
+                        une, deux ou aucune option.</p>
+                </div>
+
+                <hr class="text-gray-300">
+                <div class="flex justify-between mx-4">
+                    <button
+                        class="font-bold bg-white border-2 border-gray-300 my-4 p-2 rounded-lg w-32 flex justify-center items-center"
+                        href="">Précédent</button>
+                    <button
+                        class="font-bold bg-blue-600 my-4 p-2 rounded-lg w-32 flex justify-center  text-white items-center "
+                        href="">Suivant</button>
+                </div>
+
+            </div>
+            <!-- step 4 -->
+            <div id="step_4" class="grid grid-cols-1 gap-4 hidden ">
+                <p class="text-blue-600 text-sm font-semibold">04 / RÉCAPITULATIF</p>
+                <h3 class="text-3xl font-bold">Vérifiez votre demande</h3>
+                <p class="text-gray-400 font-semibold text-sm">Tout est prêt ? Vérifiez vos informations avant de
+                    confirmer.</p>
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="flex justify-between mr-4">
+                        <div>
+                            <h3 class="text-lg font-bold">Véhicule et dates</h3>
+                            <p class="text-gray-500 text-lg mt-3">Dacia Sandero · 250 MAD / jour
+                                Du 10 au 12 novembre 2026 · 3 jours</p>
+                        </div>
+                        <a class="font-bold bg-white border-2 border-gray-300 h-10 w-36 p-2 rounded-lg  flex justify-center items-center"
+                            href="">Modifier</a>
+                    </div>
+                    <hr class="text-gray-300">
+                    <div class="flex justify-between mr-4">
+                        <div>
+                            <h3 class="text-lg font-bold">Récupération</h3>
+                            <p class="text-gray-500 text-lg mt-3">Dacia Sandero · 250 MAD / jour
+                                Du 10 au 12 novembre 2026 · 3 jours</p>
+                        </div>
+                        <a class="font-bold bg-white border-2 border-gray-300 h-10 w-36 p-2 rounded-lg  flex justify-center items-center"
+                            href="">Modifier</a>
+                    </div>
+                    <hr class="text-gray-300">
+                    <div class="flex justify-between mr-4">
+                        <div>
+                            <h3>Options</h3>
+                            <p>Dacia Sandero · 250 MAD / jour
+                                Du 10 au 12 novembre 2026 · 3 jours</p>
+                        </div>
+                        <a class="font-bold bg-white border-2 border-gray-300 h-10 w-36 p-2 rounded-lg  flex justify-center items-center"
+                            href="">Modifier</a>
+                    </div>
+                    <hr class="text-gray-300">
+
+                </div>
+                <hr class="text-gray-300">
+                <div class="flex justify-between mx-4">
+                    <button
+                        class="font-bold bg-white border-2 border-gray-300 my-4 p-2 rounded-lg w-32 flex justify-center items-center"
+                        href="">Précédent</button>
+                    <button
+                        class="font-bold bg-blue-600 my-4 p-2 rounded-lg w-32 flex justify-center  text-white items-center "
+                        href="">Confirmer</button>
+                </div>
+            </div>
+        </form>
+
+    </section>
+    <!-- <section>
+        <p>VOTRE LOCATION</p>
+        <h3>Dacia Sandero</h3>
+        <p>Citadine · 250 MAD / jour</p>
+        <hr>
+        <p>10 → 12 novembre 2026</p>
+        <p>3 jours · dates incluses</p>
+        <p>Véhicule · 3 × 250 MAD<span>750 MAD</span></p>
+        <p>Récupération<span>Gratuite</span></p>
+        <hr>
+        <p>Total estimé<span>750 MAD</span></p>
+        <p>Frais de récupération facturés une seule fois.</p>
+        <p>Une demande, sans paiement en ligne.</p>
+    </section> -->
+</body>
+
+</html>
