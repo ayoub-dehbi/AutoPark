@@ -40,7 +40,7 @@ else
 
 
 let edit_car
-let id_car = 6
+let id_car = 7
 
 let edit_checker = 0
 
